@@ -176,36 +176,29 @@ May this year bring you everything your heart quietly wishes for.
 </video>
 </section>
 
+
 <script>
-const oldNext=window.nextScreen;
-window.nextScreen=function(){
-  oldNext();
-  const screens=[...document.querySelectorAll('.screen')];
-  if(document.querySelector('.screen.active')===screens[screens.length-2]){
-    setTimeout(()=>{
-      const g=document.getElementById('finalGlass');
-      if(g) g.classList.add('fade-glass');
+function startSongReveal(){
+ const final=document.getElementById('finalGlass');
+ final.classList.add('fade-glass');
+ setTimeout(()=>{
+   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+   const song=document.getElementById('songScreen');
+   song.classList.add('active');
+   const msg=document.getElementById('songMessage');
+   const vid=document.getElementById('dedicatedVideo');
+   msg.classList.add('show');
+   setTimeout(()=>{
+      msg.classList.remove('show');
       setTimeout(()=>{
-        oldNext();
-        const m=document.getElementById('songMessage');
-        const v=document.getElementById('dedicatedVideo');
-        m.classList.add('show');
-        setTimeout(()=>{
-          m.classList.remove('show');
-          m.classList.add('hide');
-          setTimeout(()=>{
-            v.classList.add('show');
-            if(window.innerHeight>window.innerWidth){
-              v.requestFullscreen?.().catch(()=>{});
-            }
-            v.play().catch(()=>{});
-          },1000);
-        },4000);
-      },2000);
-    },500);
-  }
+         vid.classList.add('show');
+         vid.play().catch(()=>{});
+      },1000);
+   },4000);
+ },2000);
 }
 </script>
+
 
 <script src="app.js"></script>
 </body>
