@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mansi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ADD YOUR OWN IMAGE -->
+<!-- Source path -->
+<!-- background-image:url('bg.jpg') -->
+
+<audio autoplay loop id="music">
+<source src="music/music.mp3" type="audio/mp3">
+</audio>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+<div class="hearts"></div>
+
+<section class="screen active">
+<div class="glass">
+<h1 class="heading">Before You Continue...</h1>
+<p>I hope you like this little creation of mine...are you ready?</p>
+
+<div class="buttons">
+<button onclick="nextScreen()">Yes</button>
+<button onclick="shake(this)">No</button>
+</div>
+</div>
+</section>
+
+<section class="screen">
+<div class="glass">
+<h1 class="heading">How I See You</h1>
+
+<p class="text">
+I see someone calm, genuine and rare in a world where most people pretend too much.
+Like, you are really the kind of person who can be trusted. You are joyful, lively and always looking forward towards LIFE. Your aura is very positive and whenever you are around me...I always feel more happier
+</p>
+
+<p class="text">
+you are someone with whom, one wants to spend his time, efforts and emotions.
+Someone capable of making people feel comfortable without even trying.
+</p>
+
+<button onclick="nextScreen()">Continue</button>
+</div>
+</section>
+
+<section class="screen">
+<div class="glass">
+<h1 class="heading">What I Experienced</h1>
+
+<p class="text">
+Some people become memories.
+Some become lessons.
+But a few become moments your mind revisits without permission. Wtih our bond, forming in such short amount of time, you becoming my priority and all. If i try to recall, even i cannot find out how did you become so important to me...It was like "Ek din ek dum se life mein aayi aur bas theher si gayi"
+I always felt happier and safe around you, you never judged me, were always there for me...you helped me regain the thinking that "some people can be trusted".
+</p>
+
+<p class="text">
+I rejoice every hour, every minute, every second, we spent together (wether online or offline), i always feel so grateful for those moments, those laughters we shared.
+And you gaining trust over me...I can't forget that. It's the biggest thing i am grateful of, that I could contribute something to you.
+</p>
+
+<button onclick="nextScreen()">Continue</button>
+</div>
+</section>
+
+<section class="screen">
+<div class="glass">
+<h1 class="heading">What I Wish For You</h1>
+
+<p class="text">
+If I had to wish for you, I could wish for every single thing in this world that can give you happiness, joy and love you crave for. EVERYTHING THIS WHOLE WORLD HAS TO OFFER.
+I genuinely hope life gives you peace, success, happiness and people who value you properly. If only i was there with you, witnessing the smile on your face, Ofcourse the one thing, i always wanted to see....that sweet smile of yours.
+Even if someday i fade away...Your joy, your smile, your "yayayaya" may never fade away, that's what I wish for.
+</p>
+
+<p class="text">
+And no matter where life takes you,
+I hope your smile never fades because of this world.
+</p>
+
+<button onclick="nextScreen()">Open Letter</button>
+</div>
+</section>
+
+<section class="screen">
+<div class="glass">
+
+<h1 class="heading">A Letter For You</h1>
+
+<div class="envelope" onclick="openLetter()">
+
+<div class="top"></div>
+
+<div class="letter" id="letter">
+
+<p class="bold">10th July 2026</p>
+
+<p class="bold">To Mansi,</p>
+
+<p class="italic">
+Some people enter life loudly.
+Some silently become unforgettable.
+</p>
+
+<p class="italic">
+You are genuinely one of the most graceful souls I have met.
+Not because of appearance alone,
+but because of the warmth your presence carries.
+</p>
+
+<p class="italic">
+I hope birthdays continue bringing you beautiful memories,
+good people and endless reasons to smile.
+</p>
+
+<p class="italic">
+No matter how much time passes,
+some people are always remembered with respect and softness.
+</p>
+
+<p class="italic">
+Stay happy.
+Stay strong.
+Stay exactly the way you are.
+</p>
+
+<p class="bold signature">
+Yours truly,<br>
+Vibhav
+</p>
+
+</div>
+
+</div>
+
+<button class="continue" onclick="nextScreen()">Final Reveal</button>
+
+</div>
+</section>
+
+<section class="screen">
+<div class="glass final" id="finalGlass">
+
+<h1 class="birthday">Happy Birthday Mansi ❤️</h1>
+
+<p class="finaltext">
+Another year wiser.<br>
+Another year brighter.<br>
+Another year becoming even more unforgettable.
+Even this card isn't grateful enough to bear the feelings and emotions i have for you....sometimes even the writer runs out of the words when emotions take charge. If only you could feel..
+</p>
+
+<p class="ending">
+May this year bring you everything your heart quietly wishes for.
+</p>
+
+<button class="continue" onclick="startSongReveal()">Next</button>
+</div>
+</section>
+
+<section class="screen" id="songScreen">
+<div class="song-message" id="songMessage">And here is a song dedicated to you</div>
+<video id="dedicatedVideo" playsinline controls preload="auto">
+<source src="music/video.mp4" type="video/mp4">
+</video>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
