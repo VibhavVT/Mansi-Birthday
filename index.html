@@ -177,6 +177,9 @@ May this year bring you everything your heart quietly wishes for.
 const screens = document.querySelectorAll('.screen');
 let current = 0;
 
+// Gyro wind variable
+let currentWindX = 30; // Default wind blowing slightly right
+
 function nextScreen() {
     screens[current].classList.remove('active');
     current++;
@@ -210,25 +213,34 @@ function createHeart() {
 }
 setInterval(createHeart, 700);
 
+// Gyroscope handler function
+function handleOrientation(event) {
+    if (event.gamma !== null) {
+        currentWindX = event.gamma * 1.8; 
+    }
+}
+
 // Leaves / Wind Animation
 const leavesContainer = document.getElementById('leavesContainer');
 function createLeaf() {
     const leaf = document.createElement('div');
     leaf.classList.add('leaf');
     
-    const leaves = ['🍃', '🍂'];
+    // Expanded array for more colorful and beautiful leaves
+    const leaves = ['🍃', '🍂', '🍁', '🌿', '🌸'];
     leaf.innerHTML = leaves[Math.floor(Math.random() * leaves.length)];
     
-    // Physics Logic
-    const startX = Math.random() * 120 - 20; 
+    // Physics Logic with wider spawn area to accommodate gyro shifting
+    const startX = Math.random() * 160 - 30; 
     const startY = -10; 
     
-    const endX = startX + 30 + (Math.random() * 50); 
+    // Use the gyroscope value (currentWindX) to push the leaves left or right
+    const endX = startX + currentWindX + (Math.random() * 50 - 25); 
     const endY = 110; 
     
-    const duration = Math.random() * 6 + 5; 
+    const duration = Math.random() * 6 + 4; 
     const rot = Math.random() * 1080 - 540; 
-    const size = Math.random() * 10 + 20; 
+    const size = Math.random() * 12 + 20; 
     
     leaf.style.left = startX + 'vw';
     leaf.style.top = startY + 'vh';
@@ -245,33 +257,27 @@ function createLeaf() {
 }
 setInterval(createLeaf, 300);
 
+// Start music and enable gyro right away
 document.body.addEventListener('click', () => {
     document.getElementById('music').play().catch(() => {});
+    window.addEventListener('deviceorientation', handleOrientation);
 }, { once: true });
 
 // Logic for the final reveal transition
 function startSongReveal() {
-    // 1. Fade out the glass card, floating hearts, and the LEAVES
     document.getElementById('finalGlass').style.opacity = '0';
     document.querySelector('.hearts').style.opacity = '0';
-    leavesContainer.style.opacity = '0'; // Leaves disappear here
+    leavesContainer.style.opacity = '0';
     
-    // Wait for the fade out to mostly finish
     setTimeout(() => {
-        // Move to the final video/message screen
         nextScreen();
-        
-        // 2. Show the phrase
         const msg = document.getElementById('songMessage');
         msg.classList.add('show');
         
-        // 3. Keep phrase on screen, then fade it and music out, start video
         setTimeout(() => {
-            // Fade out phrase
             msg.classList.remove('show');
             msg.classList.add('hide');
             
-            // Fade out music slowly
             const music = document.getElementById('music');
             let vol = music.volume;
             let fadeOutInterval = setInterval(() => {
@@ -285,14 +291,12 @@ function startSongReveal() {
                 }
             }, 200); 
             
-            // 4. Wait for message to disappear, then show & play video
             setTimeout(() => {
                 msg.style.display = 'none';
                 const video = document.getElementById('dedicatedVideo');
                 video.classList.add('show');
                 video.play().catch(e => console.log("Video play error:", e));
                 
-                // 5. Leaves reappear in the background behind the video
                 leavesContainer.style.opacity = '1';
                 
             }, 1500); 
