@@ -178,7 +178,7 @@ const screens = document.querySelectorAll('.screen');
 let current = 0;
 
 // Gyro wind variable
-let currentWindX = 30; // Default wind blowing slightly right
+let currentWindX = 30; // Default wind 
 
 function nextScreen() {
     screens[current].classList.remove('active');
@@ -213,15 +213,21 @@ function createHeart() {
 }
 setInterval(createHeart, 700);
 
-// Gyroscope handler function
+// Gyroscope handler function for INSTANT movement
+const leavesContainer = document.getElementById('leavesContainer');
 function handleOrientation(event) {
     if (event.gamma !== null) {
-        currentWindX = event.gamma * 1.8; 
+        // Update new leaf trajectory
+        currentWindX = event.gamma * 2.5; 
+        
+        // INSTANTLY shift the entire background container to give immediate feedback
+        // event.gamma is usually between -90 and 90.
+        const shiftX = event.gamma * 1.5; 
+        leavesContainer.style.transform = `translateX(${shiftX}vw)`;
     }
 }
 
 // Leaves / Wind Animation
-const leavesContainer = document.getElementById('leavesContainer');
 function createLeaf() {
     const leaf = document.createElement('div');
     leaf.classList.add('leaf');
@@ -230,11 +236,12 @@ function createLeaf() {
     const leaves = ['🍃', '🍂', '🍁', '🌿', '🌸'];
     leaf.innerHTML = leaves[Math.floor(Math.random() * leaves.length)];
     
-    // Physics Logic with wider spawn area to accommodate gyro shifting
-    const startX = Math.random() * 160 - 30; 
+    // Physics Logic with wide spawn area
+    // Since the container is now 200vw wide, we spawn across the full width
+    const startX = Math.random() * 200; 
     const startY = -10; 
     
-    // Use the gyroscope value (currentWindX) to push the leaves left or right
+    // Trajectory includes the current gyro wind direction
     const endX = startX + currentWindX + (Math.random() * 50 - 25); 
     const endY = 110; 
     

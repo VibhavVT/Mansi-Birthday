@@ -28,14 +28,19 @@ body {
     background: linear-gradient(to bottom, rgba(0,0,0,.3), rgba(0,0,0,.6));
 }
 
-/* Leaves Animation */
+/* Leaves Animation - UPDATED for instant gyro response */
 .leaves-container {
     position: fixed;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    /* Made container 200% wide so when it shifts via gyro, the edges don't show */
+    left: -50vw;
+    width: 200vw;
     pointer-events: none;
     overflow: hidden;
     z-index: 10;
-    transition: opacity 1.5s ease;
+    /* Added transform to the transition so gyro updates are smooth but instant */
+    transition: opacity 1.5s ease, transform 0.1s linear;
 }
 
 .leaf {
@@ -281,7 +286,7 @@ button:hover {
     object-fit: contain;
     background: transparent;
     z-index: 40;
-    opacity: 0.55; 
+    opacity: 0.75; /* Opacity updated to 75% */
 }
 #dedicatedVideo.show { display: block; }
 .fade-glass { opacity: 0; transition: 2s; }
